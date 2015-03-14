@@ -12,25 +12,12 @@ end
 
 contestid=option[:id]
 url="http://judge.u-aizu.ac.jp/onlinejudge/webservice/contest_status_log?id="+contestid
+teamlistfile="teamlist.txt"
 
-teams = [
-    "CALPIS",
-    "yoposu",
-    "too_Long",
-    "nimoji",
-    "Yanatsu",
-    "Jorkers",
-    "SKN",
-    "mod_gzip",
-    "kog",
-    "Doubling",
-    "WorkshopWitches",
-    "AccountSheet",
-    "omu_sawa_dan",
-    "WJK",
-    "UraKuni",
-    "ODD",
-]
+teams = File.open(teamlistfile).readlines
+teams.each { |team|
+  team.chomp!
+}
 
 puts "contest id:\t\t#{contestid}"
 puts "onsite Team count:\t#{teams.size}"
