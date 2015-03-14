@@ -7,8 +7,12 @@ option={}
 OptionParser.new do |opt|
   opt.on('-i', '--id=VALUE',   'AOJのコンテストID(必須)') {|v| option[:id] = v}
   opt.parse!(ARGV)
-end
 
+  if !option[:id]
+    puts opt
+    exit 1
+  end
+end
 
 contestid=option[:id]
 url="http://judge.u-aizu.ac.jp/onlinejudge/webservice/contest_status_log?id="+contestid
