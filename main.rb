@@ -36,6 +36,8 @@ allac={}
 onsiteac={}
 allacteam={}
 onsiteacteam={}
+allFA={}
+onsiteFA={}
 doc.elements.each('contest_status/status') do |element|
   problem_id=element.elements['problem_id'].text
   user_id=element.elements['user_id'].text
@@ -47,6 +49,7 @@ doc.elements.each('contest_status/status') do |element|
 
   if status_code =="4"
     allacteam[problem_id]=[] if !allacteam.key?(problem_id)
+    allFA[problem_id]=user_id if !allFA.key?(problem_id)
     if !allacteam[problem_id].find{ |id| id==user_id}
       allacteam[problem_id].push(user_id)
       allac[problem_id]=0 if !allac.key?(problem_id)
@@ -60,6 +63,7 @@ doc.elements.each('contest_status/status') do |element|
 
     if status_code =="4"
       onsiteacteam[problem_id]=[] if !onsiteacteam.key?(problem_id)
+      onsiteFA[problem_id]=user_id if !onsiteFA.key?(problem_id)
       if !onsiteacteam[problem_id].find{ |id| id==user_id}
         onsiteacteam[problem_id].push(user_id)
         onsiteac[problem_id]=0 if !onsiteac.key?(problem_id)
@@ -73,11 +77,11 @@ end
 puts "ONsite:"
 onsitesubmit.to_a.sort.each do |prog|
   onsiteac[prog[0]]=0 if !onsiteac.key?(prog[0])
-  puts "#{prog[0]}: #{onsiteac[prog[0]]}/#{prog[1]}"
+  puts "#{prog[0]}: #{onsiteac[prog[0]]}/#{prog[1]}  FA:#{onsiteFA[prog[0]]}"
 end
 
 puts "ALL:"
 allsubmit.to_a.sort.each do |prog|
   allsiteac[prog[0]]=0 if !allac.key?(prog[0])
-  puts "#{prog[0]}: #{allac[prog[0]]}/#{prog[1]}"
+  puts "#{prog[0]}: #{allac[prog[0]]}/#{prog[1]}  FA:#{allFA[prog[0]]}"
 end
