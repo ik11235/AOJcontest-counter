@@ -28,3 +28,8 @@ F: 6/119 	 First AC:yutaka1999
 ```
 ruby main.rb -i [Contest ID]
 ```
+
+## CAUTION
+  - compile errorはsubmit数に含まない
+    - AOJ contestのstandingに準拠
+  - 同(名)チームが同じ問題に2回以上ACした場合、ACカウントは1回分のみカウントするが、submitカウントには全てのsubmitをカウント 
