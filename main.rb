@@ -43,6 +43,8 @@ allsubmit={}
 onsitesubmit = {}
 allac={}
 onsiteac={}
+allacteam={}
+onsiteacteam={}
 doc.elements.each('contest_status/status') do |element|
   problem_id=element.elements['problem_id'].text
   user_id=element.elements['user_id'].text
@@ -51,17 +53,26 @@ doc.elements.each('contest_status/status') do |element|
   allsubmit[problem_id]=allsubmit[problem_id]+1
 
   if element.elements['status_code'].text =="4"
-    allac[problem_id]=0 if !allac.key?(problem_id)
-    allac[problem_id]=allac[problem_id]+1
+    allacteam[problem_id]=[] if !allacteam.key?(problem_id)
+    if !allacteam[problem_id].find{ |id| id==user_id}
+      allacteam[problem_id].push(user_id)
+      allac[problem_id]=0 if !allac.key?(problem_id)
+      allac[problem_id]=allac[problem_id]+1
+    end
   end
 
   if teams.find { |team| team == user_id}
     onsitesubmit[problem_id]=0 if !onsitesubmit.key?(problem_id)
     onsitesubmit[problem_id]=onsitesubmit[problem_id]+1
 
+
     if element.elements['status_code'].text =="4"
-     onsiteac[problem_id]=0 if !onsiteac.key?(problem_id)
-     onsiteac[problem_id]=onsiteac[problem_id]+1
+      onsiteacteam[problem_id]=[] if !onsiteacteam.key?(problem_id)
+      if !onsiteacteam[problem_id].find{ |id| id==user_id}
+        onsiteacteam[problem_id].push(user_id)
+        onsiteac[problem_id]=0 if !onsiteac.key?(problem_id)
+        onsiteac[problem_id]=onsiteac[problem_id]+1
+      end
     end
   end
 
