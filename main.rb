@@ -23,7 +23,8 @@ teams = [
     "ODD",
 ]
 
-p url
+puts "contest id: #{contestid}"
+puts "contest API url: #{url}"
 xml = open(url)
 doc = REXML::Document.new(xml)
 
