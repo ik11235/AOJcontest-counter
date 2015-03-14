@@ -23,8 +23,10 @@ teams = [
     "ODD",
 ]
 
-puts "contest id: #{contestid}"
-puts "contest API url: #{url}"
+puts "contest id:\t\t#{contestid}"
+puts "onsite Team count:\t#{teams.size}"
+puts "contest API url:\t#{url}"
+
 xml = open(url)
 doc = REXML::Document.new(xml)
 
