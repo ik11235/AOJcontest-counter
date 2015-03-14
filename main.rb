@@ -1,7 +1,16 @@
+# -*- coding: utf-8 -*-
 require 'rexml/document'
 require 'open-uri'
+require 'optparse'
 
-contestid="RitsCamp15Day1"
+option={}
+OptionParser.new do |opt|
+  opt.on('-i', '--id=VALUE',   '1文字オプション 引数あり（必須）') {|v| option[:id] = v}
+  opt.parse!(ARGV)
+end
+
+
+contestid=option[:id]
 url="http://judge.u-aizu.ac.jp/onlinejudge/webservice/contest_status_log?id="+contestid
 
 teams = [
