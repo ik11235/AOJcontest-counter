@@ -5,7 +5,7 @@ require 'optparse'
 
 option={}
 OptionParser.new do |opt|
-  opt.on('-i', '--id=VALUE',   '1文字オプション 引数あり（必須）') {|v| option[:id] = v}
+  opt.on('-i', '--id=VALUE',   'AOJのコンテストID(必須)') {|v| option[:id] = v}
   opt.parse!(ARGV)
 end
 
