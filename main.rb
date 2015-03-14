@@ -26,7 +26,7 @@ teams = [
 p url
 xml = open(url)
 doc = REXML::Document.new(xml)
-#puts doc
+
 allsubmit={}
 onsitesubmit = {}
 allac={}
@@ -65,9 +65,7 @@ doc.elements.each('contest_status/status') do |element|
   end
 
 end
-#AC/submit
-#onsite or all
-#p onsitesubmit.to_a.sort
+
 puts "ONsite:"
 onsitesubmit.to_a.sort.each do |prog|
   puts prog[0]+ ": "+onsiteac[prog[0]].to_s+ "/"+prog[1].to_s
@@ -76,7 +74,3 @@ puts "ALL:"
 allsubmit.to_a.sort.each do |prog|
   puts prog[0]+ ": "+allac[prog[0]].to_s+ "/"+prog[1].to_s
 end
-
-#p onsiteac.to_a.sort
-#p allsubmit.to_a.sort
-#p allac.to_a.sort
