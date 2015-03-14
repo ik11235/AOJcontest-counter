@@ -74,7 +74,7 @@ doc.elements.each('contest_status/status') do |element|
 
 end
 
-puts "ONsite:"
+puts "Onsite:" if onsitesubmit.size>0
 onsitesubmit.to_a.sort.each do |prog|
   onsiteac[prog[0]]=0 if !onsiteac.key?(prog[0])
   puts "#{prog[0]}: #{onsiteac[prog[0]]}/#{prog[1]}  FA:#{onsiteFA[prog[0]]}"
