@@ -1,5 +1,5 @@
 # AOJcontest-counter
-AOJで開催されるコンテスト(http://judge.u-aizu.ac.jp/onlinejudge/contest.jsp)からAC数,submit数,first ACを取得するプログラム
+AOJで開催されるコンテスト( http://judge.u-aizu.ac.jp/onlinejudge/contest.jsp )からAC数,submit数,first ACを取得するプログラム
 
 オンサイト開催などで特定のチーム群だけでの情報と全てのチームの情報を取りたいときは、teamlist.txtに行ごとにチーム名を列挙すればそのファイルに書かれたチーム群だけの情報を取得できます。
 
