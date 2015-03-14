@@ -8,7 +8,8 @@ AOJで開催されるコンテスト( http://judge.u-aizu.ac.jp/onlinejudge/cont
 contest id:		RitsCamp15Day1
 onsite Team count:	16
 contest API url:	http://judge.u-aizu.ac.jp/onlinejudge/webservice/contest_status_log?id=RitsCamp15Day1
-ONsite:
+
+Onsite:
 A: 15/35 	 Fitst AC:Doubling
 B: 16/51 	 Fitst AC:nimoji
 C: 15/24 	 Fitst AC:WJK
