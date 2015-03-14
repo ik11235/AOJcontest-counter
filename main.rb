@@ -68,9 +68,11 @@ end
 
 puts "ONsite:"
 onsitesubmit.to_a.sort.each do |prog|
-  puts prog[0]+ ": "+onsiteac[prog[0]].to_s+ "/"+prog[1].to_s
+  onsiteac[prog[0]]=0 if !onsiteac.key?(prog[0])
+  puts "#{prog[0]}: #{onsiteac[prog[0]]}/#{prog[1]}"
 end
 puts "ALL:"
 allsubmit.to_a.sort.each do |prog|
-  puts prog[0]+ ": "+allac[prog[0]].to_s+ "/"+prog[1].to_s
+    allsiteac[prog[0]]=0 if !allac.key?(prog[0])
+    puts "#{prog[0]}: #{allac[prog[0]]}/#{prog[1]}"
 end
