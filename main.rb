@@ -5,7 +5,9 @@ require 'optparse'
 
 option={}
 OptionParser.new do |opt|
-  opt.on('-i', '--id=VALUE',   'AOJのコンテストID(必須)') {|v| option[:id] = v}
+  opt.on('-b','--balloon', '風船運びモード(終了までonsite ACを監視)') {|v| option[:balloon] = v}
+
+  opt.on('-i', '--id=VALUE', 'AOJのコンテストID(必須)') {|v| option[:id] = v}
   opt.parse!(ARGV)
 
   if !option[:id]
@@ -27,7 +29,40 @@ teams.each { |team|
 
 puts "contest id:\t\t#{contestid}"
 puts "onsite Team count:\t#{teams.size}"
-puts "contest API url:\t#{url}\n\n"
+puts "contest API url:\t#{url}\n"
+
+
+if option[:balloon]
+  puts "move balloon mode"
+  infoxml = open("http://judge.u-aizu.ac.jp/onlinejudge/webservice/contest_info?id="+contestid)
+  infodoc = REXML::Document.new(infoxml)
+  nowtime = Time.at(infodoc.elements['contest_info/start_date'].text.to_i/1000.0)
+  endtime = Time.at(infodoc.elements['contest_info/end_date'].text.to_i/1000.0)
+  puts "contest endtime : #{endtime}"
+
+  while true
+    puts "requesting…"
+    xml = open(url)
+    doc = REXML::Document.new(xml)
+    doc.elements.each('contest_status/status') do |element|
+      problem_id=element.elements['problem_id'].text
+      user_id=element.elements['user_id'].text
+      status_code =element.elements['status_code'].text
+      if status_code == ACCEPT_CODE &&teams.find { |team| team == user_id} && Time.at(element.elements['judge_date'].text.to_i) > nowtime
+        puts "Team #{user_id} accept #{problem_id}!    \t submit time:#{Time.at(element.elements['submission_date'].text.to_i/ 1000.0)}"
+        outputflag = false
+      end
+    end
+
+    if nowtime >endtime
+      puts "finished This Contest!"
+      break
+    end
+    nowtime = Time.now
+    sleep 10
+  end
+end
+
 
 xml = open(url)
 doc = REXML::Document.new(xml)
