@@ -82,6 +82,6 @@ end
 
 puts "ALL:"
 allsubmit.to_a.sort.each do |prog|
-  allsiteac[prog[0]]=0 if !allac.key?(prog[0])
+  allac[prog[0]]=0 if !allac.key?(prog[0])
   puts "#{prog[0]}: #{allac[prog[0]]}/#{prog[1]}  FA:#{allFA[prog[0]]}"
 end
