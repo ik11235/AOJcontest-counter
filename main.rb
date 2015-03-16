@@ -56,8 +56,8 @@ doc.elements.each('contest_status/status') do |element|
     allFA[problem_id]=user_id if !allFA.key?(problem_id)
     if !allacteam[problem_id].find{ |id| id==user_id}
       allacteam[problem_id].push(user_id)
-      allac[problem_id]=0 if !allac.key?(problem_id)
-      allac[problem_id]=allac[problem_id]+1
+      allac[problem_id] = 0 if !allac.key?(problem_id)
+      allac[problem_id] += 1
     end
   end
 
@@ -70,20 +70,22 @@ doc.elements.each('contest_status/status') do |element|
       onsiteFA[problem_id]=user_id if !onsiteFA.key?(problem_id)
       if !onsiteacteam[problem_id].find{ |id| id==user_id}
         onsiteacteam[problem_id].push(user_id)
-        onsiteac[problem_id]=0 if !onsiteac.key?(problem_id)
-        onsiteac[problem_id]=onsiteac[problem_id]+1
+        onsiteac[problem_id] = 0 if !onsiteac.key?(problem_id)
+        onsiteac[problem_id] += 1
       end
     end
   end
 
 end
 
+#ユーザリストに含まれるチームのみの集計出力
 puts "Onsite:" if onsitesubmit.size>0
 onsitesubmit.to_a.sort.each do |prog|
   onsiteac[prog[0]]=0 if !onsiteac.key?(prog[0])
   puts "#{prog[0]}: #{onsiteac[prog[0]]}/#{prog[1]}  FA:#{onsiteFA[prog[0]]}"
 end
 
+#全参加者の集計出力
 puts "ALL:"
 allsubmit.to_a.sort.each do |prog|
   allac[prog[0]]=0 if !allac.key?(prog[0])
