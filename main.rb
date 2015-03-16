@@ -17,6 +17,8 @@ end
 contestid=option[:id]
 url="http://judge.u-aizu.ac.jp/onlinejudge/webservice/contest_status_log?id="+contestid
 teamlistfile="teamlist.txt"
+ACCEPT_CODE="4"
+COMPILEERR_CODE="0"
 
 teams = File.open(teamlistfile).readlines
 teams.each { |team|
@@ -42,12 +44,14 @@ doc.elements.each('contest_status/status') do |element|
   problem_id=element.elements['problem_id'].text
   user_id=element.elements['user_id'].text
   status_code =element.elements['status_code'].text
-  next if status_code =="0"
+
+  #このsubmitがコンパイルエラーならばカウントしない
+  next if status_code == COMPILEERR_CODE
 
   allsubmit[problem_id]=0 if !allsubmit.key?(problem_id)
   allsubmit[problem_id]=allsubmit[problem_id]+1
 
-  if status_code =="4"
+  if status_code == ACCEPT_CODE
     allacteam[problem_id]=[] if !allacteam.key?(problem_id)
     allFA[problem_id]=user_id if !allFA.key?(problem_id)
     if !allacteam[problem_id].find{ |id| id==user_id}
@@ -61,7 +65,7 @@ doc.elements.each('contest_status/status') do |element|
     onsitesubmit[problem_id]=0 if !onsitesubmit.key?(problem_id)
     onsitesubmit[problem_id]=onsitesubmit[problem_id]+1
 
-    if status_code =="4"
+    if status_code == ACCEPT_CODE
       onsiteacteam[problem_id]=[] if !onsiteacteam.key?(problem_id)
       onsiteFA[problem_id]=user_id if !onsiteFA.key?(problem_id)
       if !onsiteacteam[problem_id].find{ |id| id==user_id}
